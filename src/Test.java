@@ -1,5 +1,5 @@
 
-public class Tester {
+public class Test {
 	
 	public int plus (int a, int b) {
 		return a+b;
