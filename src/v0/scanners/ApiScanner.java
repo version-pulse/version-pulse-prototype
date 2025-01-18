@@ -9,17 +9,12 @@ import v0.annotations.Api;
 
 public class ApiScanner {
 
-	public void scan(List<Class<?>> clazzes) {
-		ApiScanner apiScanner = new  ApiScanner();
-		System.out.println("### method scan ###");
-		for (Class<?> clazz : clazzes) {
-			System.out.println(clazz.getName());
-			List<Method> methods = apiScanner.getAnnotatedMethod(clazz);
-			for (Method method : methods) {
-				System.out.print(method.getName()+" ");
-			}
-			System.out.println();
+	public List<Method> scan(Class<?> clazz) {
+		List<Method> methods = getAnnotatedMethod(clazz);
+		for (Method method : methods) {
+			System.out.println(method.getName());
 		}
+		return methods;
 	}
 	
 	

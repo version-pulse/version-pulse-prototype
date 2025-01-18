@@ -1,4 +1,4 @@
-package v0.sample;
+package v0.samples;
 
 import v0.annotations.Api;
 import v0.annotations.ApiGroup;

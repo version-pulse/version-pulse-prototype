@@ -5,4 +5,4 @@
  * @author SuHyeon
  *
  */
-package v0.sample;
+package v0.samples;
