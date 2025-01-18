@@ -4,12 +4,17 @@
   <artifactId>version-pulse-v.0.0</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
-    <!-- Spring Boot Starter Web: REST API, 웹 애플리케이션 지원 -->
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-        <version>3.4.1</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>3.4.1</version>
     </dependency>
+    <dependency>
+	  <groupId>org.projectlombok</groupId>
+	  <artifactId>lombok</artifactId>
+	  <scope>provided</scope>
+	  <version>1.18.36</version>
+	</dependency>
     <!-- 기타 의존성 추가 가능 -->
   </dependencies>
   <build>
