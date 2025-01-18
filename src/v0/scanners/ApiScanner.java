@@ -8,14 +8,13 @@ import java.util.List;
 import v0.annotations.Api;
 
 public class ApiScanner {
-	public static void main(String[] args) {
-		ApiGroupScanner apiGroupScanner = new ApiGroupScanner();
-		List<Class<?>> clazzes = apiGroupScanner.scan();
+
+	public void scan(List<Class<?>> clazzes) {
 		ApiScanner apiScanner = new  ApiScanner();
 		System.out.println("### method scan ###");
 		for (Class<?> clazz : clazzes) {
 			System.out.println(clazz.getName());
-			List<Method> methods = apiScanner.scan(clazz);
+			List<Method> methods = apiScanner.getAnnotatedMethod(clazz);
 			for (Method method : methods) {
 				System.out.print(method.getName()+" ");
 			}
@@ -23,7 +22,9 @@ public class ApiScanner {
 		}
 	}
 	
-	public List<Method> scan(Class<?> clazz) {
+	
+	
+	public List<Method> getAnnotatedMethod(Class<?> clazz) {
 		List<Method> results = new ArrayList<>();
 		
 		Method[] methods = clazz.getDeclaredMethods();

@@ -9,10 +9,13 @@ import java.util.List;
 import v0.annotations.ApiGroup;
 
 public class ApiGroupScanner {
-	public static void main(String[] args) {
-		ApiGroupScanner annotationScanner = new ApiGroupScanner();
-		annotationScanner.scan();
+	
+	String packageName;
+	
+	public ApiGroupScanner(String packageName) {
+		this.packageName = packageName;
 	}
+	
 	
 	public List<Class<?>> scan() {
 		List<Class<?>> all = getAllClass();
@@ -21,14 +24,12 @@ public class ApiGroupScanner {
 		for (Class<?> clazz : clazzes) {
 			System.out.println(clazz.getName());
 		}
-		
 		return clazzes;
 	}
 	
 	
 	
 	private List<Class<?>> getAllClass() {
-		String packageName = "v0.sample";
         String packagePath = packageName.replace('.', '/');
         URL url = ApiGroupScanner.class.getClassLoader().getResource(packagePath);
 
