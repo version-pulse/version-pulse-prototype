@@ -1,9 +1,9 @@
-package v0.apispecifications;
+package io.versionpulse.api.apispecifications;
 
 import java.lang.reflect.Method;
 
-import v0.apispecifications.models.MethodModel;
-import v0.apispecifications.models.ParameterModel;
+import io.versionpulse.api.apispecifications.models.MethodModel;
+import io.versionpulse.api.apispecifications.models.ParameterModel;
 
 public class ApiSpecFetcher {
 	private final Method method;

@@ -1,12 +1,12 @@
-package v0;
+package io.versionpulse;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import v0.apispecifications.ApiSpecFetcher;
-import v0.scanners.ApiGroupScanner;
-import v0.scanners.ApiScanner;
+import io.versionpulse.api.apispecifications.ApiSpecFetcher;
+import io.versionpulse.api.scanners.ApiGroupScanner;
+import io.versionpulse.api.scanners.ApiScanner;
 
 public class VersionPulse {
 	public static String packageName;

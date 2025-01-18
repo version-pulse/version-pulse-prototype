@@ -1,4 +1,4 @@
-package v0.models;
+package io.versionpulse.api.models;
 
 import java.util.List;
 

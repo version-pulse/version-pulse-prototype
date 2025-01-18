@@ -1,4 +1,4 @@
-package v0.apispecifications;
+package io.versionpulse.api.apispecifications;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import v0.apispecifications.models.ParameterModel;
+import io.versionpulse.api.apispecifications.models.ParameterModel;
 
 public class MethodParameterReader {
 	

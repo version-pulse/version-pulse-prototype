@@ -1,11 +1,11 @@
-package v0.samples;
+package io.versionpulse.api.samples;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import v0.annotations.Api;
-import v0.annotations.ApiGroup;
+import io.versionpulse.api.annotations.Api;
+import io.versionpulse.api.annotations.ApiGroup;
 
 @ApiGroup(value = "s3 컨트롤러")
 public class S3 {

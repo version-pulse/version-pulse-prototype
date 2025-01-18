@@ -1,4 +1,4 @@
-package v0.scanners;
+package io.versionpulse.api.scanners;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import v0.annotations.ApiGroup;
+import io.versionpulse.api.annotations.ApiGroup;
 
 public class ApiGroupScanner {
 	

@@ -1,7 +1,7 @@
-package v0.samples;
+package io.versionpulse.api.samples;
 
-import v0.annotations.Api;
-import v0.annotations.ApiGroup;
+import io.versionpulse.api.annotations.Api;
+import io.versionpulse.api.annotations.ApiGroup;
 
 @ApiGroup(value = "s1")
 public class S1 {

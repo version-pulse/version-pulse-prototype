@@ -1,11 +1,11 @@
-package v0.scanners;
+package io.versionpulse.api.scanners;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import v0.annotations.Api;
+import io.versionpulse.api.annotations.Api;
 
 public class ApiScanner {
 

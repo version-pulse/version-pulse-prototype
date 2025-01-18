@@ -1,4 +1,4 @@
-package v0.apispecifications.models;
+package io.versionpulse.api.apispecifications.models;
 
 import org.springframework.http.HttpMethod;
 

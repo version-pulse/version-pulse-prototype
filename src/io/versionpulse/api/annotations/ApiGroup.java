@@ -1,4 +1,4 @@
-package v0.annotations;
+package io.versionpulse.api.annotations;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

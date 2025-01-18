@@ -1,4 +1,4 @@
-package v0.apispecifications;
+package io.versionpulse.api.apispecifications;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import v0.apispecifications.models.MethodModel;
+import io.versionpulse.api.apispecifications.models.MethodModel;
 
 public class MethodAnnotationReader {
 	
