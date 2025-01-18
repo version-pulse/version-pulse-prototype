@@ -1,20 +1,21 @@
 package v0.apispecifications;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
+import v0.apispecifications.models.MethodModel;
+import v0.apispecifications.models.ParameterModel;
 
 public class ApiSpecFetcher {
-	public String getPath(Method method) {
-		String path = null;
-		Annotation[] annotations = method.getAnnotations();
-		for (Annotation annotation : annotations) {
-			if (annotation instanceof GetMapping) {
-				path = ((GetMapping) annotation).name();
-			}
-		}
-		return path;
+	private final Method method;
+	public ApiSpecFetcher(Method method) {
+		this.method = method;
+	}
+	
+	public void print() {
+		MethodModel methodModel = MethodAnnotationReader.getMethod(method);
+		if (methodModel == null) return;
+		ParameterModel parameterModel =  MethodParameterReader.getParameter(method);
+		System.out.print(methodModel.toString());
+		System.out.print(parameterModel.toString());
 	}
 }

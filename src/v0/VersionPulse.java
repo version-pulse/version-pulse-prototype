@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import v0.apispecifications.Facade;
+import v0.apispecifications.ApiSpecFetcher;
 import v0.scanners.ApiGroupScanner;
 import v0.scanners.ApiScanner;
 
@@ -19,16 +19,19 @@ public class VersionPulse {
 	
 	public void execute() {
 		ApiGroupScanner apiGroupScanner = new ApiGroupScanner(packageName);
-		
-		List<Class<?>> clazzes = apiGroupScanner.scan();
 		ApiScanner apiScanner = new ApiScanner();
 		List<Method> methods = new ArrayList<>();
+		
+		List<Class<?>> clazzes = apiGroupScanner.scan(); // 컨트롤러 단위 스캔
+		
 		for (Class<?> clazz : clazzes) {
-			List<Method> targets = apiScanner.scan(clazz);
+			List<Method> targets = apiScanner.scan(clazz); // API 단위 스캔
+			
 			for (Method target : targets) {
-				Facade facade = new Facade(target);
-				facade.printSpec();
+				ApiSpecFetcher apiSpecFetcher = new ApiSpecFetcher(target);
+				apiSpecFetcher.print();
 			}
+			
 			methods.addAll(targets);
 		}
 	}
