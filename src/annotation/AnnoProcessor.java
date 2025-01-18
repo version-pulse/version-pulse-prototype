@@ -21,12 +21,15 @@ public class AnnoProcessor {
 				System.out.println(myAnno.value());
 				Method[] methods = clazz.getDeclaredMethods();
 				for (Method method : methods) {
-					System.out.print(method.getName()+" °á°ú: ");
-					method.invoke(testObj, a, b);
-					
+					Annotation[] annos = method.getDeclaredAnnotations();
+					for (Annotation anno : annos) {
+						if (anno instanceof MyAnno) {
+							System.out.print(((MyAnno) anno).value()+" ");
+							method.invoke(testObj, a,b);
+						}
+					}
 				}
 			}
 		}
 	}
-
 }
