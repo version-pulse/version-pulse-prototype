@@ -17,6 +17,4 @@ public class ApiSpecFetcher {
 		}
 		return path;
 	}
-	
-
 }
