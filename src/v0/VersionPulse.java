@@ -10,6 +10,7 @@ public class VersionPulse {
 	
 	public VersionPulse(String packageName) {
 		VersionPulse.packageName = packageName;
+		execute();
 	}
 	
 	public void execute() {
