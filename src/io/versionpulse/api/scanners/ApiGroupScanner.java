@@ -1,8 +1,13 @@
 package io.versionpulse.api.scanners;
 
-import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +23,7 @@ public class ApiGroupScanner {
 	
 	
 	public List<Class<?>> scan() {
-		List<Class<?>> all = getAllClass();
+		List<Class<?>> all = getAllClass(packageName);
 		List<Class<?>> clazzes = getAnnotatedClass(all);
 		
 		for (Class<?> clazz : clazzes) {
@@ -27,38 +32,36 @@ public class ApiGroupScanner {
 		return clazzes;
 	}
 	
-	
-	
-	private List<Class<?>> getAllClass() {
+	public List<Class<?>> getAllClass(String packageName) {
+        List<Class<?>> classes = new ArrayList<>();
         String packagePath = packageName.replace('.', '/');
-        URL url = ApiGroupScanner.class.getClassLoader().getResource(packagePath);
+        URL packageURL = ApiGroupScanner.class.getClassLoader().getResource(packagePath);
 
-        if (url == null) {
-            System.out.println("패키지를 찾을 수 없습니다.");
-        }
-
-        File directory = null;
-        try {
-			directory = new File(url.toURI());
-		} catch (Exception e) {
+		try {
+			Path path = Paths.get(packageURL.toURI());
+			if (Files.exists(path) && Files.isDirectory(path)) {
+	            // 디렉토리 내 파일들을 순회
+	            DirectoryStream<Path> stream = Files.newDirectoryStream(path);
+                for (Path entry : stream) {
+                    // 파일이 .class 파일이면 클래스로 로드
+                    if (Files.isDirectory(entry)) {
+                        // 하위 디렉토리 재귀 탐색
+                        classes.addAll(getAllClass(packageName + "." + entry.getFileName()));
+                    } else if (entry.toString().endsWith(".class")) {
+                        // .class 확장자를 제거하여 클래스 이름 생성
+                        String className = entry.getFileName().toString().substring(0, entry.getFileName().toString().length() - 6);
+                        Class<?> cls = Class.forName(packageName + "." + className);
+                        classes.add(cls);
+                    }
+                }
+	        }
+		} catch (URISyntaxException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        List<Class<?>> results = new ArrayList<>();
-        for (File file : directory.listFiles()) {
-        	if (file.getName().endsWith(".class")) {
-                String className = packageName + "." + file.getName().substring(0, file.getName().length() - 6);
-                Class<?> clazz;
-				try {
-					clazz = Class.forName(className);
-					results.add(clazz);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-            }
-        }
-        return results;
-	}
-	
+        
+        return classes;
+    }
+		
 	
 	
 	private List<Class<?>> getAnnotatedClass(List<Class<?>> all) {
