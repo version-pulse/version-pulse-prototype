@@ -32,7 +32,11 @@ public class ParameterModel {
 		}
 		if (this.requestBody != null) {
 			sb.append("requestBody\n");
-			sb.append(requestBody.getBody().getName());
+			sb.append(requestBody.getName()+"\n");
+			for (String[] item : requestBody.getField()) {
+				sb.append(item[1]+" : "+item[0]+"\n");
+				
+			}
 		}
 		return sb.toString();
 	}
@@ -61,10 +65,12 @@ public class ParameterModel {
 	
 	@Getter
 	public static class RequestBody {
-		Class<?> body;
+		List<String[]> field;
+		String name;
 		
-		public RequestBody(Class<?> body) {
-			this.body = body;
+		public RequestBody(String name, List<String[]> field) {
+			this.name = name;
+			this.field = field;
 		}
 	}
 }

@@ -1,8 +1,10 @@
 package io.versionpulse.api.apispecifications;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,18 @@ public class MethodParameterReader {
 	}
 	
 	private static ParameterModel.RequestBody getRequestBody(Parameter parameter) {
-		return new ParameterModel.RequestBody(parameter.getClass());
+		Type type = parameter.getType();
+		List<String[]> body = new ArrayList<>();
+		if (type instanceof Class<?>) {
+	        Class<?> clazz = (Class<?>) type;
+
+	        Field[] fields = clazz.getDeclaredFields();
+	        for (Field field : fields) {
+	            field.setAccessible(true);  // private 필드도 접근할 수 있도록 설정
+	            body.add(new String[] {field.getType().toString(), field.getName()});
+	        }
+	    }
+		return new ParameterModel.RequestBody(parameter.getType().toString(), body);
 	}
 
 }
