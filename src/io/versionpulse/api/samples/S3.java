@@ -13,10 +13,11 @@ public class S3 {
 	
 	@Api(name = "s3_1 API")
 	@GetMapping(name = "hey")
-	public void s3_1(
+	public SBody2 s3_1(
 			@RequestParam(name="qs1") String name1,
 			@RequestParam(name="qs2") String name2,
 			@PathVariable(name="pv1") Integer name3,
-			@RequestBody SBody sBody) {};
+			@RequestBody SBody sBody) 
+	{return new SBody2(); };
 
 }
