@@ -7,13 +7,17 @@ import java.util.List;
 import io.versionpulse.api.apispecifications.ApiSpecFetcher;
 import io.versionpulse.api.scanners.ApiGroupScanner;
 import io.versionpulse.api.scanners.ApiScanner;
+import io.versionpulse.doc.apis.CreateDatabase;
 
 public class VersionPulse {
 	public static String packageName;
-	public static String notionUrl = "~~~";
+	public static String notionKey;
+	public static String pageId;
 	
-	public VersionPulse(String packageName) {
+	public VersionPulse(String packageName, String notionKey, String pageId) {
 		VersionPulse.packageName = packageName;
+		VersionPulse.notionKey = notionKey;
+		VersionPulse.pageId = pageId;
 		execute();
 	}
 	
@@ -31,8 +35,17 @@ public class VersionPulse {
 				ApiSpecFetcher apiSpecFetcher = new ApiSpecFetcher(target);
 				apiSpecFetcher.print();
 			}
-			
 			methods.addAll(targets);
 		}
+		
+		initializeDB();
+	}
+	
+	public void initializeDB() {
+		CreateDatabase client = CreateDatabase.builder()
+				.notionKey(notionKey)
+				.pageId(pageId)
+				.build();
+		client.execute();
 	}
 }
