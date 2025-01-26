@@ -29,7 +29,7 @@ public class CreateDatabase {
         requestBody.setIcon(new CreateModel.Icon("emoji","📝"));
         requestBody.setParent(new CreateModel.Parent("page_id",pageId));
         requestBody.setTitle(Arrays.asList((new CreateModel.Title("text", new CreateModel.Title.Text("API 명세서", null)))));
-        // requestBody.setIsInline(true);
+        requestBody.setIs_inline(true);
         CreateModel.Properties properties = new CreateModel.Properties();
         properties.setBy(new CreateModel.Properties.By(new HashMap<String, Object>()));
         properties.setCheck(new CreateModel.Properties.Check(new HashMap<String, Object>()));

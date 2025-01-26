@@ -13,7 +13,7 @@ public class CreateModel {
     private Icon icon;
     private List<Title> title;
     private Properties properties;
-    // private Boolean isInline;
+     private Boolean is_inline;
 
     /**
      * private LocalDateTime createTime;
