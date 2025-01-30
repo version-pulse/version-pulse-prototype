@@ -3,7 +3,10 @@ package io.versionpulse.api.apispecifications.models;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor // json mapping À» À§ÇÔ
 public class ReturnValueModel {
 	ResponseBody responseBody;
 	
