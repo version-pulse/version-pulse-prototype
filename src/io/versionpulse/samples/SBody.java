@@ -1,4 +1,4 @@
-package io.versionpulse.api.samples;
+package io.versionpulse.samples;
 
 
 public class SBody {

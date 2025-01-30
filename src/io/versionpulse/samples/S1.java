@@ -1,4 +1,4 @@
-package io.versionpulse.api.samples;
+package io.versionpulse.samples;
 
 import io.versionpulse.api.annotations.Api;
 import io.versionpulse.api.annotations.ApiGroup;

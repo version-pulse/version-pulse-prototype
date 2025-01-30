@@ -45,7 +45,7 @@ public class VersionPulse {
 		}
 		
 //		initializeDB();
-		updateDB();
+//		updateDB();
 	}
 	
 	public void initializeDB() {
