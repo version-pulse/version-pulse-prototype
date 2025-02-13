@@ -1,3 +1,5 @@
 bin
 target
 src/io/versionpulse/Starter.java
+.project
+.classpath
