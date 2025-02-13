@@ -6,26 +6,45 @@ import io.versionpulse.api.apispecifications.models.JsonResponse;
 import io.versionpulse.api.apispecifications.models.MethodModel;
 import io.versionpulse.api.apispecifications.models.ParameterModel;
 import io.versionpulse.api.apispecifications.models.ReturnValueModel;
+import io.versionpulse.api.apispecifications.models.RootModel;
+import io.versionpulse.api.apispecifications.models.RootReq;
 import io.versionpulse.samples.SBody2;
 
 public class ApiSpecFetcher {
 	private final Method method;
+	
 	public ApiSpecFetcher(Method method) {
 		this.method = method;
+	}
+	
+	public RootModel getMethodSignature() {
+		return RootModel.builder()
+				.build();
 	}
 	
 	public void print() {
 		MethodModel methodModel = MethodAnnotationReader.getMethod(method);
 		if (methodModel == null) return;
 		ParameterModel parameterModel =  MethodParameterReader.getParameter(method);
-		ReturnValueModel returnValueModel = MethodReturnValueReader.getReturnValueModel(method);
-		System.out.print(methodModel.toString());
-		System.out.print(parameterModel.toString());
-		System.out.print(returnValueModel.toString());
+		ReturnValueModel returnValueModel = MethodReturnValueReader.getReturnValueModel(method);		
+		String returnValueModejson = MethodReturnValueReader.getReturnValueModelTest(method);
 		
-		// for object to json mapping test
-		SBody2 sbody = new SBody2("ddd","Dddd", new SBody2.BBody(100, 200, new SBody2.BBody.BBBody(20, 40)));
-		JsonResponse json = new JsonResponse(sbody);
-		System.out.println(json);
+		
+		
+		RootReq rootReq = RootReq.builder()
+				.method(methodModel.getHttpMethod().toString())
+				.path(methodModel.getPath())
+				.queryString(parameterModel.getQueryString())
+				.parameter(parameterModel.getRequestParameter())
+				.requestBody(parameterModel.getRequestBody())
+				.responseBody(returnValueModejson)
+				.build();
+		
+	
+		System.out.println(rootReq);
+	}
+	
+	private void construct() {
+		
 	}
 }
