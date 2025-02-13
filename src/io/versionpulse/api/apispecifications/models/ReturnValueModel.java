@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // json mapping À» À§ÇÔ
 public class ReturnValueModel {
 	ResponseBody responseBody;
+	String body;
 	
 	public ReturnValueModel(ResponseBody responseBody) {
 		this.responseBody = responseBody;

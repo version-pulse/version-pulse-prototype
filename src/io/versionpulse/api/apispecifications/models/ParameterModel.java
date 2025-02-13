@@ -4,15 +4,29 @@ import java.util.List;
 
 import lombok.Getter;
 
+@Getter
 public class ParameterModel {
 	List<QueryString> queryString;
 	List<RequestParameter> requestParameter;
-	RequestBody requestBody;
+	String requestBody;
 	
-	public ParameterModel(List<QueryString> queryString, List<RequestParameter> requestParameter, RequestBody requestBody) {
+	public ParameterModel(List<QueryString> queryString, List<RequestParameter> requestParameter, String requestBody) {
 		this.queryString = queryString;
 		this.requestParameter = requestParameter;
 		this.requestBody = requestBody;
+	}
+	
+	
+//	public String getRequest() {
+//		return new JsonResponse(requestBody).toString();
+//	}
+	
+	public String getQueryStringList() {
+		StringBuffer sb = new StringBuffer("?");
+		for (QueryString qs : queryString) {
+			sb.append(qs.getName()+"="+qs.getType()+"&");
+		}
+		return sb.substring(0, sb.length()-1).toString();
 	}
 	
 	@Override
@@ -32,11 +46,7 @@ public class ParameterModel {
 		}
 		if (this.requestBody != null) {
 			sb.append("requestBody\n");
-			sb.append(requestBody.getName()+"\n");
-			for (String[] item : requestBody.getField()) {
-				sb.append(item[1]+" : "+item[0]+"\n");
-				
-			}
+			sb.append(requestBody);
 		}
 		return sb.toString();
 	}
@@ -49,6 +59,11 @@ public class ParameterModel {
 		public QueryString(String type, String name) {
 			this.type = type;
 			this.name = name;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("%s=%s", name, type);
 		}
 	}
 	

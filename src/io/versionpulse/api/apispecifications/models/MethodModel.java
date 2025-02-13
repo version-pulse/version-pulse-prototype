@@ -2,6 +2,9 @@ package io.versionpulse.api.apispecifications.models;
 
 import org.springframework.http.HttpMethod;
 
+import lombok.Getter;
+
+@Getter
 public class MethodModel {
 	HttpMethod httpMethod;
 	String path;
