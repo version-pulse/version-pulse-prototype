@@ -18,6 +18,6 @@ public class S3 {
 			@RequestParam(name="qs2") String name2,
 			@PathVariable(name="pv1") Integer name3,
 			@RequestBody SBody sBody) 
-	{return new SBody2(); };
+	{return new SBody2(name2, null); };
 
 }
