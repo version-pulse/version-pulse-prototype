@@ -11,9 +11,9 @@ public class ApiScanner {
 
 	public List<Method> scan(Class<?> clazz) {
 		List<Method> methods = getAnnotatedMethod(clazz);
-		for (Method method : methods) {
-			System.out.println("api 이름: "+method.getName());
-		}
+//		for (Method method : methods) {
+//			System.out.println("api 이름: "+method.getName());
+//		}
 		return methods;
 	}
 	

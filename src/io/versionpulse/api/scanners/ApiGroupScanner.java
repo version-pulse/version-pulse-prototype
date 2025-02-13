@@ -26,9 +26,9 @@ public class ApiGroupScanner {
 		List<Class<?>> all = getAllClass(packageName);
 		List<Class<?>> clazzes = getAnnotatedClass(all);
 		
-		for (Class<?> clazz : clazzes) {
-			System.out.println("컨트롤러 클래스: "+clazz.getName());
-		}
+//		for (Class<?> clazz : clazzes) {
+//			System.out.println("컨트롤러 클래스: "+clazz.getName());
+//		}
 		return clazzes;
 	}
 	
