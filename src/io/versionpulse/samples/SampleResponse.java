@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SampleResponse {
     private SampleResponse() {};
     private String name;
-    public String nickname2;
+    public int nickname2;
 	private BBody bbody;
 	
 	@AllArgsConstructor

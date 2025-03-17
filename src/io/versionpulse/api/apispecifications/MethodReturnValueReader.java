@@ -38,6 +38,7 @@ public class MethodReturnValueReader {
 		
 		Type type = method.getGenericReturnType();
 		
+		
 		if (type instanceof ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) type;
             Type actualTypes = parameterizedType.getActualTypeArguments()[0];
@@ -48,6 +49,15 @@ public class MethodReturnValueReader {
 	        clazz = (Class<?>) type;
 	    }
 		
+		// 기본타입
+		if (clazz.getPackage() == null || clazz.isPrimitive()) {
+			return String.format("%s", clazz.getName());
+		}
+		// 래퍼타입
+		if (clazz.getPackage().getName().startsWith("java.lang")) {
+    		return String.format("%s",clazz.getSimpleName());
+		}
+		// 사용자 정의
 		Object obj = clazz;
 		Constructor constructor;
 		try {

@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RestController;
+
 import io.versionpulse.api.annotations.ApiGroup;
 
 public class ApiGroupScanner {
@@ -26,10 +28,18 @@ public class ApiGroupScanner {
 		List<Class<?>> all = getAllClass(packageName);
 		List<Class<?>> clazzes = getAnnotatedClass(all);
 		
-//		for (Class<?> clazz : clazzes) {
-//			System.out.println("컨트롤러 클래스: "+clazz.getName());
-//		}
 		return clazzes;
+	}
+	
+	public String getApiGroupName(Class<?> clazz) {
+		ApiGroup apiGroup = clazz.getAnnotation(ApiGroup.class);
+        String nameValue = apiGroup.name();
+		return nameValue;
+	}
+	
+	public String getApiCommonPath(Class<?> clazz) {
+		RestController restController = clazz.getAnnotation(RestController.class);
+		return restController.value();
 	}
 	
 	public List<Class<?>> getAllClass(String packageName) {

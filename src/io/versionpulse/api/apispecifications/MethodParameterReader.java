@@ -37,7 +37,7 @@ public class MethodParameterReader {
                 	requestParameterList.add(getRequestParameter(parameter, (PathVariable) annotation));
                 }
                 else if (annotation instanceof RequestBody) {
-                	requestBody = getRequestBody(parameter);
+                	requestBody = getRequestBody(parameter, (RequestBody) annotation);
                 }
             }
         }
@@ -52,13 +52,22 @@ public class MethodParameterReader {
 		return new ParameterModel.RequestParameter(parameter.getType().getSimpleName(), pathVariable.name());
 	}
 	
-	private static String getRequestBody(Parameter parameter) {
+	private static String getRequestBody(Parameter parameter, RequestBody requestBody) {
 		Type type = parameter.getType();
 		Class<?> clazz = null;
 		if (type instanceof Class<?>) {
 	        clazz = (Class<?>) type;
 	    }
 		
+		// 기본타입
+		if (clazz.getPackage() == null || clazz.isPrimitive()) {
+			return String.format("{\"%s\": \"%s\"}", parameter.getName(), clazz.getName());
+		}
+		// 래퍼타입
+		if (clazz.getPackage().getName().startsWith("java.lang")) {
+    		return String.format("{\"%s\": \"%s\"}", parameter.getName(), clazz.getSimpleName());
+		}
+		// 사용자 정의
 		Object obj = clazz;
 		Constructor constructor;
 		try {

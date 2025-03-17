@@ -2,38 +2,33 @@ package io.versionpulse.api.apispecifications;
 
 import java.lang.reflect.Method;
 
-import io.versionpulse.api.apispecifications.models.JsonResponse;
 import io.versionpulse.api.apispecifications.models.MethodModel;
 import io.versionpulse.api.apispecifications.models.ParameterModel;
 import io.versionpulse.api.apispecifications.models.ReturnValueModel;
-import io.versionpulse.api.apispecifications.models.RootModel;
-import io.versionpulse.api.apispecifications.models.RootReq;
-import io.versionpulse.samples.SBody2;
+import io.versionpulse.api.models.enums.ApiModel;
 
 public class ApiSpecFetcher {
 	private final Method method;
+	private final String commonPath;
 	
-	public ApiSpecFetcher(Method method) {
+	public ApiSpecFetcher(Method method, String commonPath) {
 		this.method = method;
+		this.commonPath = commonPath;
 	}
+
 	
-	public RootModel getMethodSignature() {
-		return RootModel.builder()
-				.build();
-	}
-	
-	public void print() {
+	public ApiModel fetch() {
 		MethodModel methodModel = MethodAnnotationReader.getMethod(method);
-		if (methodModel == null) return;
+		if (methodModel == null) return null;
 		ParameterModel parameterModel =  MethodParameterReader.getParameter(method);
 		ReturnValueModel returnValueModel = MethodReturnValueReader.getReturnValueModel(method);		
 		String returnValueModejson = MethodReturnValueReader.getReturnValueModelTest(method);
 		
 		
 		
-		RootReq rootReq = RootReq.builder()
+		ApiModel apiModel = ApiModel.builder()
 				.method(methodModel.getHttpMethod().toString())
-				.path(methodModel.getPath())
+				.path(commonPath+methodModel.getPath())
 				.queryString(parameterModel.getQueryString())
 				.parameter(parameterModel.getRequestParameter())
 				.requestBody(parameterModel.getRequestBody())
@@ -41,10 +36,8 @@ public class ApiSpecFetcher {
 				.build();
 		
 	
-		System.out.println(rootReq);
+		return apiModel;
 	}
 	
-	private void construct() {
-		
-	}
+	
 }

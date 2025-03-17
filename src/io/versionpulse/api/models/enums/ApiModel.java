@@ -1,9 +1,9 @@
-package io.versionpulse.api.apispecifications.models;
+package io.versionpulse.api.models.enums;
 
 import java.util.List;
 import java.util.Map;
 
-
+import io.versionpulse.api.apispecifications.models.ParameterModel;
 import io.versionpulse.api.apispecifications.models.ParameterModel.QueryString;
 import io.versionpulse.api.apispecifications.models.ParameterModel.RequestParameter;
 import lombok.AllArgsConstructor;
@@ -13,23 +13,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RootReq {
-	private String method;
-	private String path;
-	private List<QueryString> queryString;
-	private List<RequestParameter> parameter;
-	private String requestBody;
-	private String responseBody;
+public class ApiModel {
+	protected String method;
+	protected String path;
+	protected List<QueryString> queryString;
+	protected List<RequestParameter> parameter;
+	protected String requestBody;
+	protected String responseBody;
 
 
 	@Override
 	public String toString() {
 		StringBuffer queryStringSb = new StringBuffer();
 		for (QueryString qstr : queryString) {
-			queryStringSb.append(qstr.getName()+"="+qstr.getType()+"&");
-		}
-		if (queryStringSb.length() > 0) {
-			queryStringSb.deleteCharAt(queryStringSb.length()-1);
+			queryStringSb.append("&"+qstr.getName()+"="+qstr.getType());
 		}
 		StringBuffer paramSb = new StringBuffer();
 		for (RequestParameter rstr : parameter) {
@@ -39,7 +36,7 @@ public class RootReq {
 			paramSb.deleteCharAt(paramSb.length()-1);
 		}
 		return "method : " + method + 
-				"\npath : " + path + 
+				"\npath : " + path + queryStringSb +
 				"\nqueryString : " + queryStringSb + 
 				"\nparameter : " +paramSb + 
 				"\nrequestBody : " + requestBody +

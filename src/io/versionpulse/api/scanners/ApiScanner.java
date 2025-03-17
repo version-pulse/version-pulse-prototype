@@ -11,12 +11,19 @@ public class ApiScanner {
 
 	public List<Method> scan(Class<?> clazz) {
 		List<Method> methods = getAnnotatedMethod(clazz);
-//		for (Method method : methods) {
-//			System.out.println("api ¿Ã∏ß: "+method.getName());
-//		}
 		return methods;
 	}
 	
+	public String getDetail(Method method) {
+		Api api = method.getAnnotation(Api.class);
+		return api.detail();
+	}
+	
+	public String getApiName(Method method) {
+		Api api = method.getAnnotation(Api.class);
+        String nameValue = api.name();
+		return nameValue;
+	}
 	
 	
 	public List<Method> getAnnotatedMethod(Class<?> clazz) {
